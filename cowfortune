@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# $Id: cowfortune,v 1.1 2002/12/12 21:05:10 grant Exp $
+# fortune through cowsay
+
+COWSAY=/usr/bin/cowsay
+FORTUNE=/usr/games/fortune
+
+usage () {
+    echo "cowfortune - fortune with cowsay"
+    echo "Usage: cowfortune [options] [-- [fortune options]]"
+    echo "Options:"
+    echo "-h   display this usage screen"
+    echo "-p   pass-through mode: run fortune without cowsay"
+    echo "     if \$HOME/.cowfortune is not found"
+    echo
+    echo "\$HOME/.cowfortune can contain cowsay options"
+}
+
+while getopts ph opt ; do
+    case "$opt" in
+        h) usage; exit ;;
+	p) PASSTHROUGH=y ;;
+	?) usage; exit ;;
+    esac
+done
+
+# get rid of processed options
+shift $(($OPTIND - 1))
+
+FORTUNECMD="$FORTUNE $@"
+
+if [ -e $HOME/.cowfortune ]; then
+    $FORTUNECMD | $COWSAY `cat $HOME/.cowfortune`
+else
+    if [ "$PASSTHROUGH" = "y" ]; then
+        echo  # cowsay has an almost blank line (underscores). Match it.
+        $FORTUNECMD
+    else 
+        $FORTUNECMD | $COWSAY
+    fi
+fi
