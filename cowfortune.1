@@ -1,0 +1,50 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.TH cowfortune 1 "November 2003"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+cowfortune \- fortune with cowsay
+.SH SYNOPSIS
+.B cowfortune
+.RI [ options ] [-- [fortune options]]
+.SH DESCRIPTION
+.PP
+.B cowfortune
+pipes
+.B fortune(1)
+through
+.B cowsay(1)
+.
+.SH OPTIONS
+.TP
+.B \-h,
+display a short usage screen
+.TP
+.B -p, 
+pass-through mode: run fortune without cowsay if
+.I ~/.cowfortune 
+is not found
+.SH FILES
+.I ~/.cowfortune
+is a single line of options (e.g., `-f small -n') to pass to
+cowsay. The line can be blank.
+.PP
+If 
+.I ~/.cowfortune
+does not exist, cowfortune -p will run fortune without cowsay.
+.SH SEE ALSO
+.BR fortune (1),
+.BR cowsay (1).
+.SH AUTHOR
+Grant Hollingworth <grant@antiflux.org>
+
