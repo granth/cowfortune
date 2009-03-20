@@ -2,7 +2,7 @@
 #
 # fortune through cowsay
 
-COWSAY=/usr/bin/cowsay
+COWSAY=/usr/games/cowsay
 FORTUNE=/usr/games/fortune
 
 usage () {
